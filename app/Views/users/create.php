@@ -1,28 +1,42 @@
-<?php helper('form'); ?>
+<?php
+/** @var mixed|null $validation */
+?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Create User</title>
+    <meta charset="UTF-8">
+    <title>Add Staff</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Add New User</h1>
-
-    <?php if (isset($validation)): ?>
-        <div style="color: red;">
-            <?= $validation->listErrors() ?>
+<body class="bg-slate-900 text-white min-h-screen">
+    <?= view('partials/navbar') ?>
+    <div class="max-w-lg mx-auto px-6 py-12">
+        <div class="bg-slate-800 border border-slate-700 p-8 rounded-2xl shadow-xl">
+            <h2 class="text-2xl font-bold mb-6">Add New Staff Member</h2>
+            <form action="<?= base_url('/users') ?>" method="post" enctype="multipart/form-data" class="space-y-4">
+                <?= csrf_field() ?>
+                <div>
+                    <label class="block text-slate-400 text-sm mb-1">Username</label>
+                    <input type="text" name="username" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-indigo-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-slate-400 text-sm mb-1">Full Name</label>
+                    <input type="text" name="full_name" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-indigo-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-slate-400 text-sm mb-1">Password</label>
+                    <input type="password" name="password" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white focus:border-indigo-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-slate-400 text-sm mb-1">Avatar Image</label>
+                    <input type="file" name="avatar" class="w-full text-slate-400 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-500">
+                </div>
+                <div class="flex justify-end space-x-3 pt-4">
+                    <a href="<?= base_url('/users') ?>" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm">Cancel</a>
+                    <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-sm font-semibold">Save Staff</button>
+                </div>
+            </form>
         </div>
-    <?php endif; ?>
-
-    <form action="/users/create" method="post">
-        <label>Username:</label><br>
-        <input type="text" name="username" value="<?= old('username') ?>"><br><br>
-
-        <label>Full Name:</label><br>
-        <input type="text" name="full_name" value="<?= old('full_name') ?>"><br><br>
-
-        <button type="submit">Save User</button>
-    </form>
-    <br>
-    <a href="/users">Back to Users</a>
+    </div>
 </body>
 </html>

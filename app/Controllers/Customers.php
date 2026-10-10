@@ -14,7 +14,7 @@ class Customers extends BaseController
 
         $data['customers'] = array_map(function ($customer) {
             return [
-                'name'  => $customer['full_name'],
+                'name'  => $customer['name'],
                 'email' => $customer['email'],
                 'phone' => $customer['phone'],
             ];
